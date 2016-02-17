@@ -47,5 +47,5 @@ frontend http-in
 backend vendavo
     cookie $COOKIE insert indirect nocache
 EOF
-printf $SERVERS | awk -v server_max_connection="$SERVER_MAX_CONNECTION" -F ':' 'BEGIN { RS = ";" } ; { print "    server",$1,$1":"$2" maxconn",server_max_connection,"check cookie",$1 }'
+printf $SERVERS | awk -v server_max_connection="$SERVER_MAX_CONNECTION" -F ':' 'BEGIN { RS = ";" } ; { print "    server",$1"-"NR,$1":"$2" maxconn",server_max_connection,"check cookie",$1"-"NR }'
 echo
